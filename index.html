@@ -2,12 +2,85 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SF Mood Map — The city’s mood, block by block</title>
+    <meta name="description" content="The city’s mood, block by block — updated live from SF 311." />
+    <meta property="og:title" content="SF Mood Map" />
+    <meta property="og:description" content="The city’s mood, block by block — updated live from SF 311." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/share/daily.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SF Mood Map" />
+    <meta name="twitter:description" content="The city’s mood, block by block — updated live from SF 311." />
+    <meta name="twitter:image" content="/share/daily.png" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link href="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/src/ui.css" />
   </head>
-  <body>
-    <div id="app"></div>
+  <body class="bg-neutral-950 text-neutral-100">
+    <div id="app" class="h-screen w-screen grid grid-rows-[auto,1fr,auto]">
+      <header class="flex items-center justify-between gap-4 px-4 py-2 border-b border-neutral-800" aria-label="Top Bar">
+        <div class="flex items-center gap-3">
+          <img src="/favicon.svg" alt="SF Mood Map" class="w-7 h-7" />
+          <div class="text-lg font-semibold">SF Mood Map</div>
+          <div id="degraded" class="ml-2 hidden px-2 py-0.5 text-xs rounded bg-neutral-800 text-amber-300" aria-live="polite">Degraded mode</div>
+        </div>
+        <div class="flex items-center gap-2" role="group" aria-label="View controls">
+          <label class="sr-only" for="timeWindow">Time window</label>
+          <select id="timeWindow" class="control-select" aria-label="Time window">
+            <option value="6">Last 6h</option>
+            <option value="24" selected>Last 24h</option>
+            <option value="48">Last 48h</option>
+          </select>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input id="emojiToggle" type="checkbox" class="control-checkbox" aria-label="Emoji mode" />
+            <span class="text-sm">Emoji</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input id="contrastToggle" type="checkbox" class="control-checkbox" aria-label="High contrast colors" />
+            <span class="text-sm">High contrast</span>
+          </label>
+          <a href="/press.html" class="ml-2 text-sm underline underline-offset-4 opacity-80 hover:opacity-100">Press</a>
+          <button id="embedBtn" class="ml-1 control-button" aria-label="Copy embed code">Embed</button>
+        </div>
+      </header>
+
+      <main class="relative grid grid-cols-1 md:grid-cols-[1fr,360px] gap-0">
+        <div id="map" class="w-full h-[60vh] md:h-full"></div>
+        <aside id="leaderboard" class="border-l border-neutral-800 p-4 overflow-auto" aria-label="Leaderboard">
+          <h2 class="text-base font-semibold mb-3">Now</h2>
+          <div class="space-y-4">
+            <div>
+              <div class="text-sm uppercase tracking-wide text-neutral-400">Happiest</div>
+              <ol id="happyList" class="mt-1 text-sm"></ol>
+            </div>
+            <div>
+              <div class="text-sm uppercase tracking-wide text-neutral-400">Most Stressed</div>
+              <ol id="stressList" class="mt-1 text-sm"></ol>
+            </div>
+            <div>
+              <div class="text-sm uppercase tracking-wide text-neutral-400">Most Improved vs. Yesterday</div>
+              <ol id="improvedList" class="mt-1 text-sm"></ol>
+            </div>
+          </div>
+          <div class="mt-6 flex items-center gap-2">
+            <button id="shareX" class="control-button" aria-label="Share to X">Share to X</button>
+            <button id="shareCopy" class="control-button" aria-label="Copy link">Copy link</button>
+          </div>
+        </aside>
+
+        <div id="tooltip" class="tooltip hidden"></div>
+      </main>
+
+      <footer class="flex items-center justify-between px-4 py-2 border-t border-neutral-800 text-xs text-neutral-400">
+        <div>Updated at <span id="updatedAt">—</span></div>
+        <div>
+          Data: <a class="underline hover:text-neutral-200" href="https://data.sfgov.org/City-Management-and-Ethics/311-Cases/vw6y-z8j6" target="_blank" rel="noreferrer">SF 311 (Socrata)</a>
+        </div>
+      </footer>
+    </div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
-</html>
+  </html>
