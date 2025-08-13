@@ -1,0 +1,23 @@
+{
+  "name": "sf-mood-map",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "gen:og": "node scripts/generate-og.mjs"
+  },
+  "devDependencies": {
+    "@types/maplibre-gl": "^1.13.2",
+    "puppeteer": "^24.16.1",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.2"
+  },
+  "dependencies": {
+    "@turf/turf": "^7.2.0",
+    "maplibre-gl": "^5.6.2",
+    "zod": "^4.0.17"
+  }
+}

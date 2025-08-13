@@ -1,0 +1,16 @@
+:root { --bg: #0a0a0a; --panel: #111; --muted: #999; --border: #262626; }
+.control-button { padding: 6px 10px; border: 1px solid var(--border); border-radius: 8px; background: #151515; font-size: 13px; }
+.control-button:hover { background: #1b1b1b; }
+.control-select { background: #151515; border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; font-size: 13px; }
+.control-checkbox { width: 16px; height: 16px; accent-color: #888; }
+#map { outline: none; }
+.tooltip { position: absolute; pointer-events: none; z-index: 30; background: rgba(15,15,15,0.95); color: #fff; border: 1px solid #333; border-radius: 8px; padding: 8px 10px; max-width: 320px; font-size: 12px; box-shadow: 0 10px 24px rgba(0,0,0,0.35); }
+.tooltip h3 { font-weight: 600; margin-bottom: 6px; font-size: 13px; }
+.tooltip ol { list-style: disc; padding-left: 16px; }
+body.embed header, body.embed aside, body.embed footer { display: none; }
+body.embed #map { height: 400px; }
+.high-contrast .positive { color: #00e676; }
+.high-contrast .negative { color: #ff1744; }
+.high-contrast .neutral { color: #ffea00; }
+.high-contrast .anxious { color: #b388ff; }
+.high-contrast .excited { color: #00b0ff; }

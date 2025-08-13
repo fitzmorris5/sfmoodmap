@@ -1,0 +1,6 @@
+{
+  "routes": [
+    { "src": "/press", "dest": "/press.html" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
