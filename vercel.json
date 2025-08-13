@@ -1,5 +1,6 @@
 {
   "routes": [
+    { "handle": "filesystem" },
     { "src": "/press", "dest": "/press.html" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
